@@ -57,15 +57,15 @@ the     74369
 **Q1. Is your change in the mapper or in the reducer?**
 In the reducer. Only the reducer knows the final total count of each word, so only it can pick the top 3. The reducer keeps a heap of the 3 largest counts and prints them at the end, sorted in descending order. All sorting and filtering is done inside the Python code, with no external pipes. We run with `-numReduceTasks 1` so that a single reducer sees all words. With several reducers, each one would output its own top 3.
 
-**Q2. Code:** [`reducer3.py`](reducer3.py) (used with the original [`mapper.py`](mapper.py))
+**Q2. Code:** [`reducer3.py`](reducer3.py) (used with the Exercise 2 mapper, [`mapper2.py`](mapper2.py))
 
 Run command:
 ```
-hadoop jar /usr/lib/hadoop/hadoop-streaming.jar -file ./mapper.py -mapper ./mapper.py -file ./reducer3.py -reducer ./reducer3.py -input /user/hadoop/gutenberg/* -output /user/hduser/gutenberg-output -numReduceTasks 1
+hadoop jar /usr/lib/hadoop/hadoop-streaming.jar -file ./mapper2.py -mapper ./mapper2.py -file ./reducer3.py -reducer ./reducer3.py -input /user/hadoop/gutenberg/* -output /user/hduser/gutenberg-output -numReduceTasks 1
 ```
 
 **Q3. Output:**
 
 ![Exercise 3 output](exercise3_output.png)
 
-Note: the run above uses the original `mapper.py`, so the only change is in the reducer. With the Exercise 2 mapper (`mapper2.py`), the top 3 would be `the 74369`, `and 42768`, `of 34588` (taken from the Exercise 2 output).
+The result matches the top 3 of the full Exercise 2 count (`the 74369`, `and 42768`, `of 34588`).
