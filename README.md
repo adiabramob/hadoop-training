@@ -66,6 +66,6 @@ hadoop jar /usr/lib/hadoop/hadoop-streaming.jar -file ./mapper2.py -mapper ./map
 
 **Q3. Output:**
 
-![Exercise 3 output](exercise3_output.png)
+![Exercise 3 output](exercise3_output_mapper2.png)
 
 The result matches the top 3 of the full Exercise 2 count (`the 74369`, `and 42768`, `of 34588`).
