@@ -18,7 +18,7 @@ Job counters from the two runs:
 6 output files (`part-00000` to `part-00005`), plus the `_SUCCESS` status file, which is not a data file.
 
 **Q2. Did the number of mappers change?**
-No. It stayed 9. The number of mappers is set by the number of input splits (`number of splits:9`: the 3 input files were divided into 9 splits). Changing the number of reducers does not change the input.
+No. It stayed 9. The number of mappers is set by the number of input splits (`number of splits:9`: the 3 input files were divided into 9 splits). Changing the number of reducers does not change the input. Each book is smaller than one HDFS block, but Hadoop Streaming uses the old `mapred` API, which divides the total input size by the cluster's map-task hint to get a target split size of about 0.9 MB. So each book was cut into several splits.
 
 **Q3. Did the number of reducers change?**
 Yes, from 3 to 6, because we set it explicitly with `-numReduceTasks 6`.
@@ -67,3 +67,5 @@ hadoop jar /usr/lib/hadoop/hadoop-streaming.jar -file ./mapper.py -mapper ./mapp
 **Q3. Output:**
 
 ![Exercise 3 output](exercise3_output.png)
+
+Note: the run above uses the original `mapper.py`, so the only change is in the reducer. With the Exercise 2 mapper (`mapper2.py`), the top 3 would be `the 74369`, `and 42768`, `of 34588` (taken from the Exercise 2 output).
